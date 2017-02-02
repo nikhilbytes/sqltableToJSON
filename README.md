@@ -50,12 +50,15 @@ sqltableToJSON API provides a way to do it.
 you have to create two table in your current relational DB and define your object in any insertion order.
 ## Table 1-  `jsonproperty`
 It defines your several JSON properties  as object,array,integer,float,string,boolean
-id     propertyName     propertytype
-1      chartObjet       object
-2      type             string
-3      categories       array
-4      arrayofobject    array
-5      simpleobject     object      
+
+| id |    propertyName |    propertytype |
+|---| -----------------|----------------|
+|1    |  chartObjet     |  object |
+|2    |  type           |  string |
+|3    |  categories     |  array |
+|4    |  arrayofobject  |  array |
+|5    |  simpleobject   |  object |     
+
 ## Table 2-  `jsonInternalrelation` 
 It defines the parent to child relationship among properties defined in table `jsonproperty`. column `value` will be null ,in case of object.if you have array of string or integer,value will be defined as comma seperated values as 'see','the','color',2 will be converted as ['see','the','color',2] but in case of array of object define array as parent of each object with null value.no need to maintain any insertion order.   
 
