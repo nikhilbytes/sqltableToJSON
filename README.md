@@ -58,6 +58,8 @@ id     propertyName     propertytype
 5      simpleobject     object      
 ## Table 2-  `jsonInternalrelation` 
 It defines the parent to child relationship among properties defined in table `jsonproperty`. column `value` will be null ,in case of object.if you have array of string or integer,value will be defined as comma seperated values as 'see','the','color',2 will be converted as ['see','the','color',2] but in case of array of object define array as parent of each object with null value.no need to maintain any insertion order.   
+
+
 |id | idJsonproperty(foriegn key) | idJsonpropertyParent(foriegn key) | value|
 |---| ----------------------------|-----------------------------------|-----|
 |1   |    1                 |              null           |              null (Root object starts here)|
