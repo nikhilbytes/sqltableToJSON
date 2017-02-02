@@ -48,7 +48,7 @@ public Class MypojoForJson
 
 sqltableToJSON API provides a way to do it.
 you have to create two table in your current relational DB and define your object in any insertion order.
-# Table 1-  `jsonproperty`
+## Table 1-  `jsonproperty`
 It defines your several JSON properties  as object,array,integer,float,string,boolean
 id     propertyName     propertytype
 1      chartObjet       object
@@ -56,9 +56,9 @@ id     propertyName     propertytype
 3      categories       array
 4      arrayofobject    array
 5      simpleobject     object      
-# Table 2-  `jsonInternalrelation` 
+## Table 2-  `jsonInternalrelation` 
 It defines the parent to child relationship among properties defined in table `jsonproperty`. column `value` will be null ,in case of object.if you have array of string or integer,value will be defined as comma seperated values as 'see','the','color',2 will be converted as ['see','the','color',2] but in case of array of object define array as parent of each object with null value.no need to maintain any insertion order.   
-id | idJsonproperty(foriegn key) | idJsonpropertyParent(foriegn key) | value
+|id | idJsonproperty(foriegn key) | idJsonpropertyParent(foriegn key) | value|
 ---| ----------------------------|-----------------------------------|-----
 1   |    1                 |              null           |              null          (Root object starts here)
 2   |    2                 |              1              |              'i am here'
@@ -66,7 +66,7 @@ id | idJsonproperty(foriegn key) | idJsonpropertyParent(foriegn key) | value
 4   |    5                 |               1             |               null
 5   |   4                  |              5              |              null
 
-HOW TO USE
+## HOW TO USE
 1.import SqltableToJSON class in your class
 2. create tables and `getJson(INT)` procedure.
 3. call static method SqltableToJSON.getJSON(1);  (Parameter is id of Root object in jsonproperty table ).
