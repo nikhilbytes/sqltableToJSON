@@ -12,47 +12,52 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
-
-import com.chart.dao.impl.ChartDaoimpl;
+import com.sqltojson.Daoimpl.SqltoTableDaoimpl;
+import com.google.gson.Gson;
 
 
-@Component
 public class SqltableToJSON {
 
-		
-public static Map getChartObject(int idMstreport,JdbcTemplate jdbcTempObj){
+public static Map getJSON(int idRoot){
+   try {
+	    	 return  gson.toJson(getJsonObject());
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+
+}	
+public static Map getJsonObject(int idRoot){
 
 	@SuppressWarnings("unchecked")
-	List<Map<String,String>> resultHead=new ChartDaoimpl().getChartData(idMstreport,jdbcTempObj);
+	List<Map<String,String>> resultHead=new ChartDaoimpl().getSqlData(idRoot);
 	Map<Object,Map> yetToresolvParent=new LinkedHashMap<Object,Map>();
 	Map<Object,List> tree=new HashMap<Object,List>();
 	for(Map<String,String> innermap: resultHead){
-		if(innermap.get("idChartobjectrelationParent")==null){
-			innermap.put("idChartobjectrelationParent","ROOT");
+		if(innermap.get("idJsonpropertyParent")==null){
+			innermap.put("idJsonpropertyParent","ROOT");
 		}
 		//Check parent in final
-		if(!tree.containsKey(innermap.get("idChartobjectrelationParent"))){
+		if(!tree.containsKey(innermap.get("idJsonpropertyParent"))){
 			List temp=	new ArrayList<Object>();
-					temp.add(innermap.get("idChartProperty"));
-			tree.put(innermap.get("idChartobjectrelationParent"),temp);
+					temp.add(innermap.get("idJsonproperty"));
+			tree.put(innermap.get("idJsonpropertyParent"),temp);
 		}else{
-			List temp=tree.get(innermap.get("idChartobjectrelationParent"));
-			temp.add(innermap.get("idChartProperty"));
-			tree.put(innermap.get("idChartobjectrelationParent"),temp);
+			List temp=tree.get(innermap.get("idJsonpropertyParent"));
+			temp.add(innermap.get("idJsonproperty"));
+			tree.put(innermap.get("idJsonpropertyParent"),temp);
 		}
 		
 		//Parent Not found in final
-		if(yetToresolvParent!=null && yetToresolvParent.containsKey(innermap.get("idChartobjectrelationParent"))){
-			Map temp=yetToresolvParent.get(innermap.get("idChartobjectrelationParent"));
+		if(yetToresolvParent!=null && yetToresolvParent.containsKey(innermap.get("idJsonpropertyParent"))){
+			Map temp=yetToresolvParent.get(innermap.get("idJsonpropertyParent"));
 			temp.put(innermap.get("propertyName"), resolveTypeConstructObject(innermap.get("propertyType"), innermap.get("propertyName"), innermap.get("value")));
-			yetToresolvParent.put(innermap.get("idChartobjectrelationParent"),temp );
+			yetToresolvParent.put(innermap.get("idJsonpropertyParent"),temp );
 			
 		}else{
 			Object temp=resolveTypeConstructObject(innermap.get("propertyType"), innermap.get("propertyName"), innermap.get("value"));
 			Map ch=new LinkedHashMap<String,Object>();  ch.put(innermap.get("propertyName"),temp );
-	    	yetToresolvParent.put(innermap.get("idChartobjectrelationParent"),ch );
+	    	yetToresolvParent.put(innermap.get("idJsonpropertyParent"),ch );
 	    }
 		
 			
