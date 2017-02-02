@@ -16,6 +16,7 @@ Take this json object
  "d":["to","convert","adhoc","json"]
  }
  ## Equivelant POJO Java class
+ ```java
 public Class MypojoForJson
 {
   private String a;
@@ -42,7 +43,7 @@ public Class MypojoForJson
 
   public void setD(ArrayList<String> d) { this.d = d; }
 }
-
+```
 ## IF it json keep changing,how will you define it ?
 
 sqltableToJSON API provides a way to do it.
