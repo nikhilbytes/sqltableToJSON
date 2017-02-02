@@ -72,7 +72,8 @@ It defines the parent to child relationship among properties defined in table `j
 |5   |   4                  |              5              |              null    |
 
 ## HOW TO USE
-1.import SqltableToJSON class in your class
+
+1. import SqltableToJSON class in your class
 2. create tables and `getJson(INT)` procedure.
 3. call static method SqltableToJSON.getJSON(1);  (Parameter is id of Root object in jsonproperty table ).
  IT'S DONE
