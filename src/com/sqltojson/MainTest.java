@@ -1,4 +1,4 @@
-
+package com.sqltojson;
 import com.sqltojson.SqltableToJSON
 
 Class MainTest
