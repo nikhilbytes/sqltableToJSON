@@ -2,10 +2,10 @@
 
 sqltabletoJson is a API written in java,which provides a architecture which enables you to convert relation table data(Mysql/orcale,Sql server etc) to JSON formate.
 
-# USECASE 
+## USECASE 
 Assume, you have a scenerio such that you have to frequently configure third party JS object without changing the code in live server as for example creating several Highchart object for populating chart without stopping the server and  without predefining any json for it.other good example can be any adhoc json which is difficult to keep a equivelent Java POJO class.  
 
-# EXAMPLE
+## EXAMPLE
 
 Take this json object
 
@@ -15,7 +15,7 @@ Take this json object
  "c":2,
  "d":["to","convert","adhoc","json"]
  }
- # Equivelant POJO Java class
+ ## Equivelant POJO Java class
 public Class MypojoForJson
 {
   private String a;
@@ -42,7 +42,8 @@ public Class MypojoForJson
 
   public void setD(ArrayList<String> d) { this.d = d; }
 }
- # IF it json keep changing,how will you define it ?
+
+## IF it json keep changing,how will you define it ?
 
 sqltableToJSON API provides a way to do it.
 you have to create two table in your current relational DB and define your object in any insertion order.
@@ -56,12 +57,13 @@ id     propertyName     propertytype
 5      simpleobject     object      
 # Table 2-  `jsonInternalrelation` 
 It defines the parent to child relationship among properties defined in table `jsonproperty`. column `value` will be null ,in case of object.if you have array of string or integer,value will be defined as comma seperated values as 'see','the','color',2 will be converted as ['see','the','color',2] but in case of array of object define array as parent of each object with null value.no need to maintain any insertion order.   
-id --- idJsonproperty(foriegn key) ---idJsonpropertyParent(foriegn key)  value
-1  ---     1    ---                           null          ---               null          (Root object starts here)
-2  ---     2    ---                            1            ---                'i am here'
-3  ---     3    ---                            1            ---              'see','the','color',2
-4  ---     5    ---                            1            ---                null
-5  ---    4     ---                           5             ---               null
+id | idJsonproperty(foriegn key) | idJsonpropertyParent(foriegn key) | value
+---| ----------------------------|-----------------------------------|-----
+1   |    1                 |              null           |              null          (Root object starts here)
+2   |    2                 |              1              |              'i am here'
+3   |    3                 |               1             |             'see','the','color',2
+4   |    5                 |               1             |               null
+5   |   4                  |              5              |              null
 
 HOW TO USE
 1.import SqltableToJSON class in your class
