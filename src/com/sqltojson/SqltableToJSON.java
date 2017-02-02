@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 
 public class SqltableToJSON {
 
-public static Map getJSON(int idRoot){
+public static String getJSON(int idRoot){
    try {
 	    	 return  gson.toJson(getJsonObject());
 		} catch (ClassNotFoundException e) {
