@@ -19,7 +19,7 @@ import com.chart.dao.impl.ChartDaoimpl;
 
 
 @Component
-public class SqltabletoJson {
+public class SqltableToJSON {
 
 		
 public static Map getChartObject(int idMstreport,JdbcTemplate jdbcTempObj){
